@@ -1,77 +1,63 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+  <article class="group bg-white border-2 border-black hover:border-accent transition-colors">
     <!-- Post Image/Icon -->
-    <div 
-      :class="[
-        'h-48 flex items-center justify-center',
-        imageGradient
-      ]"
-    >
-      <div v-if="post.image" class="w-full h-full">
-        <NuxtImg 
-          :src="post.image" 
-          :alt="post.title"
-          class="w-full h-full object-cover"
-        />
+    <div class="aspect-video bg-gray-100 relative overflow-hidden">
+      <div v-if="post.image" class="absolute inset-0">
+        <img :src="post.image" :alt="post.title" class="w-full h-full object-cover" />
       </div>
-      <UIcon 
-        v-else
-        :name="post.icon || 'i-heroicons-document-text'" 
-        class="h-16 w-16 text-white" 
-      />
+      <div v-else class="absolute inset-0 flex items-center justify-center bg-gray-100">
+        <Icon :name="post.icon || 'ph:article-bold'" class="w-16 h-16 text-gray-400" />
+      </div>
+      
+      <!-- Category Badge -->
+      <div class="absolute top-4 left-4">
+        <span 
+          :class="`${getCategoryBadgeClass(post.category)} px-3 py-1 text-xs font-bold uppercase tracking-tight`"
+        >
+          {{ post.category }}
+        </span>
+      </div>
+      
+      <!-- Reading Time -->
+      <div class="absolute bottom-4 right-4">
+        <div class="bg-black bg-opacity-70 text-white px-2 py-1 text-xs font-medium">
+          {{ post.readingTime }}
+        </div>
+      </div>
     </div>
     
     <!-- Post Content -->
     <div class="p-6">
-      <!-- Category Badge -->
-      <div class="flex items-center mb-2">
-        <UBadge 
-          :color="post.category?.color || 'primary'" 
-          variant="soft"
-        >
-          {{ post.category?.name || 'General' }}
-        </UBadge>
-      </div>
-      
-      <!-- Title -->
-      <h3 class="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
+      <h3 class="text-xl font-bold text-black mb-2 leading-tight group-hover:text-accent transition-colors">
         {{ post.title }}
       </h3>
       
-      <!-- Excerpt -->
-      <p class="text-gray-600 mb-4 line-clamp-3">
-        {{ post.excerpt || post.description }}
+      <p class="text-gray-600 text-sm leading-relaxed mb-4">
+        {{ post.excerpt }}
       </p>
       
-      <!-- Post Meta -->
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center space-x-4 text-sm text-gray-500">
-          <div class="flex items-center">
-            <UIcon name="i-heroicons-calendar-days" class="h-4 w-4 mr-1" />
-            <span>{{ formatDate(post.createdAt || post.date) }}</span>
-          </div>
-          <div class="flex items-center">
-            <UIcon name="i-heroicons-clock" class="h-4 w-4 mr-1" />
-            <span>{{ post.readTime || '5 min' }} read</span>
-          </div>
+      <!-- Meta Information -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <span class="text-xs text-gray-500 uppercase tracking-tight">
+            {{ formatDate(post.date) }}
+          </span>
+          <span class="text-xs text-gray-500 uppercase tracking-tight">
+            {{ post.readingTime }}
+          </span>
         </div>
+        
+        <!-- Read More Button -->
+        <NuxtLink 
+          :to="`/posts/${post.slug}`"
+          class="inline-flex items-center text-xs text-black hover:text-accent transition-colors uppercase tracking-tight font-semibold"
+        >
+          Read More
+          <Icon name="ph:arrow-right-bold" class="ml-1 w-3 h-3" />
+        </NuxtLink>
       </div>
-      
-      <!-- Read More Button -->
-      <UButton 
-        variant="ghost" 
-        size="sm" 
-        :to="post.to || `/posts/${post.slug}`"
-        class="group"
-      >
-        Read More
-        <UIcon 
-          name="i-heroicons-arrow-right" 
-          class="ml-1 group-hover:translate-x-1 transition-transform" 
-        />
-      </UButton>
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup>
@@ -82,53 +68,29 @@ const props = defineProps({
   }
 })
 
-// Generate gradient based on category or random
-const imageGradient = computed(() => {
-  const gradients = [
-    'bg-gradient-to-br from-blue-400 to-blue-600',
-    'bg-gradient-to-br from-green-400 to-green-600',
-    'bg-gradient-to-br from-purple-400 to-purple-600',
-    'bg-gradient-to-br from-pink-400 to-pink-600',
-    'bg-gradient-to-br from-yellow-400 to-yellow-600',
-    'bg-gradient-to-br from-indigo-400 to-indigo-600',
-    'bg-gradient-to-br from-red-400 to-red-600',
-    'bg-gradient-to-br from-teal-400 to-teal-600'
-  ]
-  
-  if (props.post.category?.gradient) {
-    return props.post.category.gradient
-  }
-  
-  // Generate consistent gradient based on title
-  const index = props.post.title.length % gradients.length
-  return gradients[index]
-})
-
-// Format date helper
+// Format date to a readable format
 const formatDate = (date) => {
-  if (!date) return ''
-  
-  const d = new Date(date)
-  return d.toLocaleDateString('en-US', {
+  return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric'
   })
 }
-</script>
 
-<style scoped>
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+// Get category badge class based on category
+const getCategoryBadgeClass = (category) => {
+  const categoryClasses = {
+    'science': 'badge-accent',
+    'literature': 'badge-pink',
+    'history': 'badge-blue',
+    'philosophy': 'badge-black',
+    'education': 'badge-accent',
+    'featured': 'badge-accent',
+    'thinking': 'badge-black',
+    'growth': 'badge-blue',
+    'default': 'badge-black'
+  }
+  
+  return categoryClasses[category?.toLowerCase()] || categoryClasses.default
 }
-
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style> 
+</script> 

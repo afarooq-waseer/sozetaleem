@@ -581,15 +581,48 @@ const cachedEventHandler = defineCachedEventHandler;
 
 const inlineAppConfig = {
   "nuxt": {},
+  "ui": {
+    "colors": {
+      "primary": "green",
+      "secondary": "blue",
+      "success": "green",
+      "info": "blue",
+      "warning": "yellow",
+      "error": "red",
+      "neutral": "slate"
+    },
+    "icons": {
+      "arrowLeft": "i-lucide-arrow-left",
+      "arrowRight": "i-lucide-arrow-right",
+      "check": "i-lucide-check",
+      "chevronDoubleLeft": "i-lucide-chevrons-left",
+      "chevronDoubleRight": "i-lucide-chevrons-right",
+      "chevronDown": "i-lucide-chevron-down",
+      "chevronLeft": "i-lucide-chevron-left",
+      "chevronRight": "i-lucide-chevron-right",
+      "chevronUp": "i-lucide-chevron-up",
+      "close": "i-lucide-x",
+      "ellipsis": "i-lucide-ellipsis",
+      "external": "i-lucide-arrow-up-right",
+      "folder": "i-lucide-folder",
+      "folderOpen": "i-lucide-folder-open",
+      "loading": "i-lucide-loader-circle",
+      "minus": "i-lucide-minus",
+      "plus": "i-lucide-plus",
+      "search": "i-lucide-search"
+    }
+  },
   "icon": {
     "provider": "server",
-    "class": "",
+    "class": "icon",
+    "size": "24px",
     "aliases": {},
     "iconifyApiEndpoint": "https://api.iconify.design",
     "localApiEndpoint": "/api/_nuxt_icon",
     "fallbackToApi": true,
     "cssSelectorPrefix": "i-",
     "cssWherePseudo": true,
+    "cssLayer": "components",
     "mode": "css",
     "attrs": {
       "aria-hidden": true
@@ -774,37 +807,6 @@ const inlineAppConfig = {
       "zondicons"
     ],
     "fetchTimeout": 1500
-  },
-  "ui": {
-    "colors": {
-      "primary": "green",
-      "secondary": "blue",
-      "success": "green",
-      "info": "blue",
-      "warning": "yellow",
-      "error": "red",
-      "neutral": "slate"
-    },
-    "icons": {
-      "arrowLeft": "i-lucide-arrow-left",
-      "arrowRight": "i-lucide-arrow-right",
-      "check": "i-lucide-check",
-      "chevronDoubleLeft": "i-lucide-chevrons-left",
-      "chevronDoubleRight": "i-lucide-chevrons-right",
-      "chevronDown": "i-lucide-chevron-down",
-      "chevronLeft": "i-lucide-chevron-left",
-      "chevronRight": "i-lucide-chevron-right",
-      "chevronUp": "i-lucide-chevron-up",
-      "close": "i-lucide-x",
-      "ellipsis": "i-lucide-ellipsis",
-      "external": "i-lucide-arrow-up-right",
-      "folder": "i-lucide-folder",
-      "folderOpen": "i-lucide-folder-open",
-      "loading": "i-lucide-loader-circle",
-      "minus": "i-lucide-minus",
-      "plus": "i-lucide-plus",
-      "search": "i-lucide-search"
-    }
   }
 };
 
@@ -863,21 +865,13 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
-      "/_fonts/**": {
-        "headers": {
-          "cache-control": "public, max-age=31536000, immutable"
-        },
-        "cache": {
-          "maxAge": 31536000
-        }
-      },
       "/__nuxt_content/**": {
         "robots": false
       },
       "/__nuxt_content/content/sql_dump.txt": {
         "prerender": true
       },
-      "/_scripts/**": {
+      "/_fonts/**": {
         "headers": {
           "cache-control": "public, max-age=31536000, immutable"
         },
@@ -898,12 +892,8 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
-    "nuxt-scripts": {
-      "version": "0.11.8",
-      "defaultScriptOptions": {
-        "trigger": "onNuxtReady"
-      }
-    },
+    "siteUrl": "https://localhost:3000",
+    "apiBase": "http://localhost:8888/api",
     "content": {
       "wsUrl": "ws://localhost:4000/"
     },
@@ -924,12 +914,6 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "icon": {
-    "serverKnownCssClasses": []
-  },
-  "nuxt-scripts": {
-    "version": "0.11.8"
-  },
   "content": {
     "databaseVersion": "v3.5.0",
     "version": "3.6.3",
@@ -942,6 +926,9 @@ const _inlineRuntimeConfig = {
       "filename": "/Users/afarooq/Documents/Projects/sozetaleem/frontend/.data/content/contents.sqlite"
     },
     "integrityCheck": true
+  },
+  "icon": {
+    "serverKnownCssClasses": []
   },
   "ipx": {
     "baseURL": "/_ipx",
@@ -1337,7 +1324,7 @@ const _fpfjcWDJXgxjszVUKeYGrchVEJRnxnB6psRchEU_vo = (function(nitro) {
 
 const rootDir = "/Users/afarooq/Documents/Projects/sozetaleem/frontend";
 
-const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"An educational platform dedicated to sharing knowledge and inspiring learning."}],"link":[{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"}],"style":[],"script":[],"noscript":[],"title":"Soze Taleem - Educational Content & Knowledge Sharing"};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"},{"name":"description","content":"Discover educational content that challenges, inspires, and transforms thinking. Continuing the legacy of meaningful learning."},{"name":"theme-color","content":"#000000"},{"name":"msapplication-TileColor","content":"#000000"}],"link":[{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"},{"rel":"preconnect","href":"https://fonts.googleapis.com"},{"rel":"preconnect","href":"https://fonts.gstatic.com","crossorigin":""},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"}],"style":[],"script":[],"noscript":[],"charset":"utf-8","viewport":"width=device-width, initial-scale=1","title":"Soze Taleem - Educational Content Platform"};
 
 const appRootTag = "div";
 
@@ -2256,7 +2243,6 @@ const handlers = [
   { route: '/__nuxt_content/:collection/query', handler: _FWCv5P, lazy: false, middleware: false, method: undefined },
   { route: '/_ipx/**', handler: _hzPVDA, lazy: false, middleware: false, method: undefined },
   { route: '/_fonts/**', handler: _lazy_DaTHkT, lazy: true, middleware: false, method: undefined },
-  { route: '/_scripts/**', handler: _lazy_DaTHkT, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_DaTHkT, lazy: true, middleware: false, method: undefined }
 ];
 

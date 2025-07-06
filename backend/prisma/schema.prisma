@@ -1,0 +1,166 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  name       String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  posts      Post[]
+  
+  @@map("users")
+}
+
+model Post {
+  id                String     @id @default(cuid())
+  title             String
+  slug              String     @unique
+  excerpt           String?    // Short description for SEO
+  content           String?    // HTML content
+  content_text      String?    // Plain text version for search
+  published         Boolean    @default(false)
+  featured          Boolean    @default(false)
+  allow_comments    Boolean    @default(true)
+  view_count        Int        @default(0)
+  reading_time      Int?       // Estimated reading time in minutes
+  
+  // SEO Fields
+  meta_title        String?    // Custom meta title
+  meta_description  String?    // Meta description
+  meta_keywords     String?    // Meta keywords
+  canonical_url     String?    // Canonical URL
+  
+  // Publishing
+  published_at      DateTime?
+  scheduled_at      DateTime?
+  
+  // Author and Categories
+  author_id         String
+  author            User       @relation(fields: [author_id], references: [id])
+  categories        PostCategory[]
+  
+  // Media
+  featured_image    String?    // URL to featured image
+  images            PostImage[]
+  
+  // Tags
+  tags              PostTag[]
+  
+  // Comments
+  comments          Comment[]
+  
+  // Timestamps
+  created_at        DateTime   @default(now())
+  updated_at        DateTime   @updatedAt
+  
+  @@index([slug])
+  @@index([published])
+  @@index([published_at])
+  @@index([featured])
+  @@index([author_id])
+  @@index([view_count])
+  @@map("posts")
+}
+
+model PostCategory {
+  id          String   @id @default(cuid())
+  post_id     String
+  category_id String
+  post        Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  
+  @@unique([post_id, category_id])
+  @@index([post_id])
+  @@index([category_id])
+  @@map("post_categories")
+}
+
+model PostTag {
+  id      String @id @default(cuid())
+  post_id String
+  tag_id  String
+  post    Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  tag     Tag    @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+  
+  @@unique([post_id, tag_id])
+  @@index([post_id])
+  @@index([tag_id])
+  @@map("post_tags")
+}
+
+model PostImage {
+  id      String   @id @default(cuid())
+  post_id String
+  url     String
+  alt     String?
+  caption String?
+  order   Int      @default(0)
+  post    Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  
+  @@index([post_id])
+  @@index([order])
+  @@map("post_images")
+}
+
+model Tag {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  description String?
+  posts       PostTag[]
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  
+  @@index([slug])
+  @@map("tags")
+}
+
+model Comment {
+  id           String   @id @default(cuid())
+  post_id      String
+  author_name  String
+  author_email String?
+  content      String
+  approved     Boolean  @default(false)
+  parent_id    String?  // For nested comments
+  parent       Comment? @relation("CommentReplies", fields: [parent_id], references: [id])
+  replies      Comment[] @relation("CommentReplies")
+  post         Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  
+  @@index([post_id])
+  @@index([approved])
+  @@index([parent_id])
+  @@map("comments")
+}
+
+model Category {
+  id          String         @id @default(cuid())
+  name        String         @unique
+  description String?
+  slug        String         @unique
+  level       Int            @default(0)
+  path        String         // Full path like "parent/child/grandchild"
+  parent_id   String?        // Self-referencing foreign key
+  parent      Category?      @relation("CategoryHierarchy", fields: [parent_id], references: [id], onDelete: Cascade)
+  children    Category[]     @relation("CategoryHierarchy")
+  posts       PostCategory[]
+  created_at  DateTime       @default(now())
+  updated_at  DateTime       @updatedAt
+
+  @@index([parent_id])
+  @@index([path])
+  @@index([level])
+  @@map("categories")
+} 

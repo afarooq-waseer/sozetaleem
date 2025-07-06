@@ -11,7 +11,23 @@
     
     <section class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Loading State -->
+        <div v-if="loading" class="text-center py-12">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+          <p class="mt-4 text-gray-600">Loading categories...</p>
+        </div>
+        
+        <!-- Error State -->
+        <div v-else-if="error" class="text-center py-12">
+          <div class="text-red-500 mb-4">
+            <Icon name="ph:warning-bold" class="w-12 h-12 mx-auto" />
+          </div>
+          <p class="text-gray-600 mb-4">Unable to load categories from the server.</p>
+          <p class="text-sm text-gray-500">Showing default categories instead.</p>
+        </div>
+        
+        <!-- Categories Grid -->
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <CategoryCard 
             v-for="category in categories" 
             :key="category.id"
@@ -24,7 +40,17 @@
 </template>
 
 <script setup>
-const categories = [
+import { ref, onMounted } from 'vue'
+
+const categories = ref([])
+const loading = ref(true)
+const error = ref(null)
+
+// Use categories composable
+const { fetchCategories } = useCategories()
+
+// Default categories for fallback
+const defaultCategories = [
   {
     id: 1,
     name: "Science",
@@ -90,6 +116,29 @@ const categories = [
     description: "Creative arts and expression"
   }
 ]
+
+// Load categories on mount
+onMounted(async () => {
+  try {
+    const { categories: fetchedCategories, error: fetchError } = await fetchCategories()
+    
+    if (fetchError) {
+      console.error('Error fetching categories:', fetchError)
+      error.value = fetchError
+      // Use default categories as fallback
+      categories.value = defaultCategories
+    } else {
+      categories.value = fetchedCategories || defaultCategories
+    }
+  } catch (err) {
+    console.error('Error loading categories:', err)
+    error.value = err
+    // Use default categories as fallback
+    categories.value = defaultCategories
+  } finally {
+    loading.value = false
+  }
+})
 
 useHead({
   title: 'Categories - Soze Taleem',

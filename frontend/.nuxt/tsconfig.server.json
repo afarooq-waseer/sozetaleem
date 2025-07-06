@@ -95,30 +95,6 @@
       "#internal/nuxt/paths": [
         "../node_modules/nuxt/dist/core/runtime/nitro/utils/paths"
       ],
-      "#image": [
-        "../node_modules/@nuxt/image/dist/runtime"
-      ],
-      "#image/*": [
-        "../node_modules/@nuxt/image/dist/runtime/*"
-      ],
-      "#nuxt-scripts-validator": [
-        "../node_modules/@nuxt/scripts/dist/runtime/validation/valibot"
-      ],
-      "#nuxt-scripts": [
-        "../node_modules/@nuxt/scripts/dist/runtime"
-      ],
-      "#nuxt-scripts/*": [
-        "../node_modules/@nuxt/scripts/dist/runtime/*"
-      ],
-      "#ui": [
-        "../node_modules/@nuxt/ui/dist/runtime"
-      ],
-      "#ui/*": [
-        "../node_modules/@nuxt/ui/dist/runtime/*"
-      ],
-      "#color-mode-options": [
-        "./color-mode-options.mjs"
-      ],
       "#content/components": [
         "./content/components"
       ],
@@ -133,6 +109,21 @@
       ],
       "#mdc-imports": [
         "./mdc-imports"
+      ],
+      "#ui": [
+        "../node_modules/@nuxt/ui/dist/runtime"
+      ],
+      "#ui/*": [
+        "../node_modules/@nuxt/ui/dist/runtime/*"
+      ],
+      "#color-mode-options": [
+        "./color-mode-options.mjs"
+      ],
+      "#image": [
+        "../node_modules/@nuxt/image/dist/runtime"
+      ],
+      "#image/*": [
+        "../node_modules/@nuxt/image/dist/runtime/*"
       ],
       "#unhead/composables": [
         "../node_modules/nuxt/dist/head/runtime/composables/v3"
@@ -159,15 +150,13 @@
   "include": [
     "./content/types.d.ts",
     "./types/nitro-nuxt.d.ts",
-    "../node_modules/@nuxt/eslint/runtime/server",
-    "../node_modules/@nuxt/fonts/runtime/server",
-    "../node_modules/@nuxt/icon/runtime/server",
-    "../node_modules/@nuxt/image/runtime/server",
-    "../node_modules/@nuxt/scripts/runtime/server",
-    "../node_modules/@nuxtjs/color-mode/runtime/server",
-    "../node_modules/@nuxt/ui/runtime/server",
     "../node_modules/@nuxtjs/mdc/runtime/server",
     "../node_modules/@nuxt/content/runtime/server",
+    "../node_modules/@nuxt/fonts/runtime/server",
+    "../node_modules/@nuxtjs/color-mode/runtime/server",
+    "../node_modules/@nuxt/ui/runtime/server",
+    "../node_modules/@nuxt/icon/runtime/server",
+    "../node_modules/@nuxt/image/runtime/server",
     "../node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",
     "./types/nitro.d.ts",
@@ -178,15 +167,13 @@
     "../node_modules",
     "../../node_modules",
     "../node_modules/nuxt/node_modules",
-    "../node_modules/@nuxt/eslint/node_modules",
-    "../node_modules/@nuxt/fonts/node_modules",
-    "../node_modules/@nuxt/icon/node_modules",
-    "../node_modules/@nuxt/image/node_modules",
-    "../node_modules/@nuxt/scripts/node_modules",
-    "../node_modules/@nuxtjs/color-mode/node_modules",
-    "../node_modules/@nuxt/ui/node_modules",
     "../node_modules/@nuxtjs/mdc/node_modules",
     "../node_modules/@nuxt/content/node_modules",
+    "../node_modules/@nuxt/fonts/node_modules",
+    "../node_modules/@nuxtjs/color-mode/node_modules",
+    "../node_modules/@nuxt/ui/node_modules",
+    "../node_modules/@nuxt/icon/node_modules",
+    "../node_modules/@nuxt/image/node_modules",
     "../node_modules/@nuxt/devtools/node_modules",
     "../node_modules/@nuxt/telemetry/node_modules",
     "../dist"

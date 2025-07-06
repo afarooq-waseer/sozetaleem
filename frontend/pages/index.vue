@@ -1,254 +1,275 @@
 <template>
-  <div class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-primary-600 to-primary-700 text-white relative overflow-hidden">
-      <!-- Background Pattern -->
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0 bg-repeat pattern-dots"></div>
-      </div>
+  <div class="bg-white">
+    <!-- Hero Section with Wired-style bold typography -->
+    <section class="relative overflow-hidden bg-white py-24 lg:py-32">
+      <!-- Minimal background pattern -->
+      <div class="absolute inset-0 pattern-dots opacity-10"></div>
       
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div class="text-center fade-in">
-          <h1 class="text-4xl md:text-6xl font-bold mb-6 font-heading">
-            Welcome to Soze Taleem
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-black mb-8 leading-tight">
+            SOZE
+            <br>
+            <span class="text-accent">TALEEM</span>
           </h1>
-          <p class="text-xl md:text-2xl mb-8 text-primary-100 max-w-3xl mx-auto leading-relaxed">
-            Continuing the legacy of meaningful education and knowledge sharing. 
-            Explore our collection of educational content and enlightening posts.
+          
+          <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-snug">
+            Educational content that challenges, inspires, and transforms thinking. 
+            Continuing the legacy of meaningful learning.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center slide-up">
-            <UButton 
-              size="lg" 
-              color="white" 
-              variant="solid"
-              to="/posts"
-              class="inline-flex items-center hover:scale-105 transition-transform shadow-lg"
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <NuxtLink 
+              to="/posts" 
+              class="inline-flex items-center px-8 py-4 bg-black text-white font-semibold text-sm uppercase tracking-tight hover:bg-accent hover:text-black transition-colors border-2 border-black"
             >
-              <UIcon name="i-heroicons-book-open" class="mr-2" />
               Explore Posts
-            </UButton>
-            <UButton 
-              size="lg" 
-              color="white" 
-              variant="outline"
-              to="/about"
-              class="inline-flex items-center hover:scale-105 transition-transform"
+              <Icon name="ph:arrow-right-bold" class="ml-2 w-4 h-4" />
+            </NuxtLink>
+            
+            <NuxtLink 
+              to="/categories" 
+              class="inline-flex items-center px-8 py-4 bg-white text-black font-semibold text-sm uppercase tracking-tight hover:bg-black hover:text-white transition-colors border-2 border-black"
             >
-              <UIcon name="i-heroicons-heart" class="mr-2" />
-              About This Journey
-            </UButton>
+              Browse Categories
+            </NuxtLink>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Featured Posts Section -->
+    <!-- Featured Content with Wired-style minimal design -->
     <section class="py-16 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 fade-in">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">
-            Featured Educational Content
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-black mb-4">
+            FEATURED
           </h2>
           <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our most impactful educational posts and resources
+            Curated educational content designed to expand your intellectual horizons.
           </p>
         </div>
-
+        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Featured Post Card 1 -->
-          <div class="bg-white rounded-lg shadow-soft overflow-hidden hover:shadow-medium transition-all duration-300 hover:scale-105 slide-up">
-            <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-              <UIcon name="i-heroicons-light-bulb" class="h-16 w-16 text-white animate-pulse-slow" />
+          <!-- Featured Posts -->
+          <article class="group bg-white border-2 border-black hover:border-accent transition-colors">
+            <div class="aspect-video bg-gray-100 relative overflow-hidden">
+              <div class="absolute inset-0 bg-black opacity-20"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <Icon name="ph:brain-bold" class="w-16 h-16 text-white" />
+              </div>
+              <div class="absolute top-4 left-4">
+                <span class="badge-accent px-3 py-1 text-xs font-bold">FEATURED</span>
+              </div>
             </div>
             <div class="p-6">
-              <div class="flex items-center mb-2">
-                <UBadge color="primary" variant="soft" class="font-medium">Education</UBadge>
-              </div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-2 font-heading">
+              <h3 class="text-xl font-bold text-black mb-2 group-hover:text-accent transition-colors">
                 The Art of Learning
               </h3>
-              <p class="text-gray-600 mb-4 leading-relaxed">
-                Discover effective learning strategies and techniques that can transform your educational journey.
+              <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                Exploring effective strategies and methodologies for lifelong learning and intellectual growth.
               </p>
-              <UButton variant="ghost" size="sm" to="/posts" class="group hover:bg-primary-50">
-                Read More
-                <UIcon name="i-heroicons-arrow-right" class="ml-1 group-hover:translate-x-1 transition-transform" />
-              </UButton>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500 uppercase tracking-tight">5 min read</span>
+                <NuxtLink 
+                  to="/posts" 
+                  class="text-xs text-black hover:text-accent transition-colors uppercase tracking-tight font-semibold"
+                >
+                  Read More
+                </NuxtLink>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <!-- Featured Post Card 2 -->
-          <div class="bg-white rounded-lg shadow-soft overflow-hidden hover:shadow-medium transition-all duration-300 hover:scale-105 slide-up" style="animation-delay: 0.1s">
-            <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-              <UIcon name="i-heroicons-academic-cap" class="h-16 w-16 text-white animate-pulse-slow" />
+          <article class="group bg-white border-2 border-black hover:border-accent transition-colors">
+            <div class="aspect-video bg-gray-100 relative overflow-hidden">
+              <div class="absolute inset-0 bg-black opacity-20"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <Icon name="ph:lightbulb-bold" class="w-16 h-16 text-white" />
+              </div>
+              <div class="absolute top-4 left-4">
+                <span class="badge-black px-3 py-1 text-xs font-bold">THINKING</span>
+              </div>
             </div>
             <div class="p-6">
-              <div class="flex items-center mb-2">
-                <UBadge color="green" variant="soft" class="font-medium">Knowledge</UBadge>
-              </div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-2 font-heading">
-                Building Critical Thinking
+              <h3 class="text-xl font-bold text-black mb-2 group-hover:text-accent transition-colors">
+                Critical Thinking
               </h3>
-              <p class="text-gray-600 mb-4 leading-relaxed">
-                Learn how to develop analytical skills and approach problems with a critical mindset.
+              <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                Developing analytical skills and logical reasoning for better decision-making in complex situations.
               </p>
-              <UButton variant="ghost" size="sm" to="/posts" class="group hover:bg-green-50">
-                Read More
-                <UIcon name="i-heroicons-arrow-right" class="ml-1 group-hover:translate-x-1 transition-transform" />
-              </UButton>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500 uppercase tracking-tight">7 min read</span>
+                <NuxtLink 
+                  to="/posts" 
+                  class="text-xs text-black hover:text-accent transition-colors uppercase tracking-tight font-semibold"
+                >
+                  Read More
+                </NuxtLink>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <!-- Featured Post Card 3 -->
-          <div class="bg-white rounded-lg shadow-soft overflow-hidden hover:shadow-medium transition-all duration-300 hover:scale-105 slide-up" style="animation-delay: 0.2s">
-            <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-              <UIcon name="i-heroicons-rocket-launch" class="h-16 w-16 text-white animate-pulse-slow" />
+          <article class="group bg-white border-2 border-black hover:border-accent transition-colors">
+            <div class="aspect-video bg-gray-100 relative overflow-hidden">
+              <div class="absolute inset-0 bg-black opacity-20"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <Icon name="ph:target-bold" class="w-16 h-16 text-white" />
+              </div>
+              <div class="absolute top-4 left-4">
+                <span class="badge-blue px-3 py-1 text-xs font-bold">GROWTH</span>
+              </div>
             </div>
             <div class="p-6">
-              <div class="flex items-center mb-2">
-                <UBadge color="purple" variant="soft" class="font-medium">Inspiration</UBadge>
-              </div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-2 font-heading">
+              <h3 class="text-xl font-bold text-black mb-2 group-hover:text-accent transition-colors">
                 Pursuing Excellence
               </h3>
-              <p class="text-gray-600 mb-4 leading-relaxed">
-                Motivation and guidance for those striving to achieve their best in educational pursuits.
+              <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                Understanding the principles and practices that lead to mastery and excellence in any field.
               </p>
-              <UButton variant="ghost" size="sm" to="/posts" class="group hover:bg-purple-50">
-                Read More
-                <UIcon name="i-heroicons-arrow-right" class="ml-1 group-hover:translate-x-1 transition-transform" />
-              </UButton>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500 uppercase tracking-tight">6 min read</span>
+                <NuxtLink 
+                  to="/posts" 
+                  class="text-xs text-black hover:text-accent transition-colors uppercase tracking-tight font-semibold"
+                >
+                  Read More
+                </NuxtLink>
+              </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- Categories Section -->
-    <section class="py-16 bg-gray-50">
+    <section class="py-16 bg-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 fade-in">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">
-            Explore by Category
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-black mb-4">
+            CATEGORIES
           </h2>
-          <p class="text-lg text-gray-600">
-            Find educational content organized by topic and subject area
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore diverse subjects and expand your knowledge across multiple disciplines.
           </p>
         </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <!-- Category 1 -->
-          <NuxtLink 
-            to="/categories" 
-            class="bg-white rounded-lg p-6 text-center hover:shadow-medium transition-all duration-300 hover:scale-105 group slide-up"
-          >
-            <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
-              <UIcon name="i-heroicons-beaker" class="h-6 w-6 text-blue-600" />
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Categories -->
+          <div class="bg-white border-2 border-black p-6 group hover:border-accent transition-colors">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-accent rounded-none flex items-center justify-center mr-3">
+                <Icon name="ph:flask-bold" class="w-6 h-6 text-black" />
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-black group-hover:text-accent transition-colors">
+                  SCIENCE
+                </h3>
+                <p class="text-xs text-gray-500 uppercase tracking-tight">12 Posts</p>
+              </div>
             </div>
-            <h3 class="font-semibold text-gray-900 mb-2 font-heading">Science</h3>
-            <p class="text-sm text-gray-600">12 Posts</p>
-          </NuxtLink>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Exploring scientific concepts, discoveries, and innovations that shape our world.
+            </p>
+          </div>
 
-          <!-- Category 2 -->
-          <NuxtLink 
-            to="/categories" 
-            class="bg-white rounded-lg p-6 text-center hover:shadow-medium transition-all duration-300 hover:scale-105 group slide-up"
-            style="animation-delay: 0.1s"
-          >
-            <div class="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-              <UIcon name="i-heroicons-book-open" class="h-6 w-6 text-green-600" />
+          <div class="bg-white border-2 border-black p-6 group hover:border-accent transition-colors">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-accent-alt rounded-none flex items-center justify-center mr-3">
+                <Icon name="ph:book-bold" class="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-black group-hover:text-accent transition-colors">
+                  LITERATURE
+                </h3>
+                <p class="text-xs text-gray-500 uppercase tracking-tight">8 Posts</p>
+              </div>
             </div>
-            <h3 class="font-semibold text-gray-900 mb-2 font-heading">Literature</h3>
-            <p class="text-sm text-gray-600">8 Posts</p>
-          </NuxtLink>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Analyzing literary works, writing techniques, and the power of storytelling.
+            </p>
+          </div>
 
-          <!-- Category 3 -->
-          <NuxtLink 
-            to="/categories" 
-            class="bg-white rounded-lg p-6 text-center hover:shadow-medium transition-all duration-300 hover:scale-105 group slide-up"
-            style="animation-delay: 0.2s"
-          >
-            <div class="h-12 w-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition-colors">
-              <UIcon name="i-heroicons-globe-alt" class="h-6 w-6 text-yellow-600" />
+          <div class="bg-white border-2 border-black p-6 group hover:border-accent transition-colors">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-accent-blue rounded-none flex items-center justify-center mr-3">
+                <Icon name="ph:clock-bold" class="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-black group-hover:text-accent transition-colors">
+                  HISTORY
+                </h3>
+                <p class="text-xs text-gray-500 uppercase tracking-tight">15 Posts</p>
+              </div>
             </div>
-                         <h3 class="font-semibold text-gray-900 mb-2 font-heading">History</h3>
-            <p class="text-sm text-gray-600">15 Posts</p>
-          </NuxtLink>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Understanding historical events, patterns, and lessons from the past.
+            </p>
+          </div>
 
-          <!-- Category 4 -->
-          <NuxtLink 
-            to="/categories" 
-            class="bg-white rounded-lg p-6 text-center hover:shadow-medium transition-all duration-300 hover:scale-105 group slide-up"
-            style="animation-delay: 0.3s"
-          >
-            <div class="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
-              <UIcon name="i-heroicons-light-bulb" class="h-6 w-6 text-purple-600" />
+          <div class="bg-white border-2 border-black p-6 group hover:border-accent transition-colors">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-black rounded-none flex items-center justify-center mr-3">
+                <Icon name="ph:question-bold" class="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-black group-hover:text-accent transition-colors">
+                  PHILOSOPHY
+                </h3>
+                <p class="text-xs text-gray-500 uppercase tracking-tight">10 Posts</p>
+              </div>
             </div>
-            <h3 class="font-semibold text-gray-900 mb-2 font-heading">Philosophy</h3>
-            <p class="text-sm text-gray-600">6 Posts</p>
-          </NuxtLink>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Exploring fundamental questions about existence, knowledge, and values.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section class="py-16 bg-primary-50">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">
-          Continue the Journey of Learning
+    <!-- Call to Action -->
+    <section class="py-16 bg-black text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-white mb-6">
+          START
+          <br>
+          <span class="text-accent">LEARNING</span>
         </h2>
-        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-          Join us in honoring the legacy of meaningful education. Every post, every insight, 
-          every moment of learning contributes to a brighter future.
+        <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+          Join thousands of learners who are expanding their minds and challenging their thinking every day.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center bounce-in">
-          <UButton 
-            size="lg" 
-            color="primary" 
-            to="/posts"
-            class="inline-flex items-center hover:scale-105 transition-transform shadow-lg"
-          >
-            <UIcon name="i-heroicons-book-open" class="mr-2" />
-            Browse All Posts
-          </UButton>
-          <UButton 
-            size="lg" 
-            variant="outline" 
-            color="primary"
-            to="/about"
-            class="inline-flex items-center hover:scale-105 transition-transform"
-          >
-            <UIcon name="i-heroicons-information-circle" class="mr-2" />
-            Learn More About Us
-          </UButton>
-        </div>
+        <NuxtLink 
+          to="/posts" 
+          class="inline-flex items-center px-8 py-4 bg-accent text-black font-semibold text-sm uppercase tracking-tight hover:bg-white transition-colors border-2 border-accent"
+        >
+          Begin Your Journey
+          <Icon name="ph:arrow-right-bold" class="ml-2 w-4 h-4" />
+        </NuxtLink>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-// SEO and Meta
-useHead({
-  title: 'Soze Taleem - Educational Content & Knowledge Sharing',
-  meta: [
-    {
-      name: 'description',
-      content: 'An educational platform dedicated to sharing knowledge and inspiring learning. Explore our collection of educational content and enlightening posts.'
-    },
-    {
-      property: 'og:title',
-      content: 'Soze Taleem - Educational Content & Knowledge Sharing'
-    },
-    {
-      property: 'og:description',
-      content: 'An educational platform dedicated to sharing knowledge and inspiring learning. Explore our collection of educational content and enlightening posts.'
-    },
-    {
-      property: 'og:type',
-      content: 'website'
-    }
-  ]
+// SEO Meta Tags
+useSeoMeta({
+  title: 'Soze Taleem - Educational Content Platform',
+  ogTitle: 'Soze Taleem - Educational Content Platform',
+  description: 'Discover educational content that challenges, inspires, and transforms thinking. Continuing the legacy of meaningful learning.',
+  ogDescription: 'Discover educational content that challenges, inspires, and transforms thinking. Continuing the legacy of meaningful learning.',
+  ogImage: '/og-image.jpg',
+  ogUrl: 'https://sozetaleem.com',
+  twitterCard: 'summary_large_image',
+})
+
+// Page animations
+onMounted(() => {
+  const elements = document.querySelectorAll('.fade-in')
+  elements.forEach((el, index) => {
+    setTimeout(() => {
+      el.classList.add('animate-fadeIn')
+    }, index * 200)
+  })
 })
 </script>
 

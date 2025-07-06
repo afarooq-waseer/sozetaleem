@@ -1,37 +1,23 @@
 <template>
   <NuxtLink 
-    :to="category.to || `/categories/${category.slug}`"
-    class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow group block"
+    :to="`/categories/${category.slug}`"
+    class="bg-white border-2 border-black p-6 group hover:border-accent transition-colors block"
   >
-    <!-- Category Icon -->
-    <div 
-      :class="[
-        'h-12 w-12 rounded-lg flex items-center justify-center mx-auto mb-4 transition-colors',
-        iconBackground,
-        iconHoverBackground
-      ]"
-    >
-      <UIcon 
-        :name="category.icon || 'i-heroicons-folder'" 
-        :class="[
-          'h-6 w-6',
-          iconColor
-        ]"
-      />
+    <div class="flex items-center mb-4">
+      <div :class="`w-12 h-12 ${getCategoryColor(category.name)} rounded-none flex items-center justify-center mr-3`">
+        <Icon :name="category.icon || 'ph:folder-bold'" class="w-6 h-6" :class="getIconColor(category.name)" />
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-black group-hover:text-accent transition-colors uppercase tracking-tight">
+          {{ category.name }}
+        </h3>
+        <p class="text-xs text-gray-500 uppercase tracking-tight">
+          {{ category.postCount || 0 }} Posts
+        </p>
+      </div>
     </div>
     
-    <!-- Category Name -->
-    <h3 class="font-semibold text-gray-900 mb-2">
-      {{ category.name }}
-    </h3>
-    
-    <!-- Post Count -->
-    <p class="text-sm text-gray-600">
-      {{ category.postCount || 0 }} Post{{ (category.postCount || 0) === 1 ? '' : 's' }}
-    </p>
-    
-    <!-- Description (optional) -->
-    <p v-if="category.description" class="text-xs text-gray-500 mt-2 line-clamp-2">
+    <p class="text-sm text-gray-600 leading-relaxed">
       {{ category.description }}
     </p>
   </NuxtLink>
@@ -45,42 +31,37 @@ const props = defineProps({
   }
 })
 
-// Color mappings for different categories
-const colorMappings = {
-  science: { bg: 'bg-blue-100', hover: 'group-hover:bg-blue-200', text: 'text-blue-600' },
-  literature: { bg: 'bg-green-100', hover: 'group-hover:bg-green-200', text: 'text-green-600' },
-  history: { bg: 'bg-yellow-100', hover: 'group-hover:bg-yellow-200', text: 'text-yellow-600' },
-  philosophy: { bg: 'bg-purple-100', hover: 'group-hover:bg-purple-200', text: 'text-purple-600' },
-  mathematics: { bg: 'bg-red-100', hover: 'group-hover:bg-red-200', text: 'text-red-600' },
-  language: { bg: 'bg-pink-100', hover: 'group-hover:bg-pink-200', text: 'text-pink-600' },
-  technology: { bg: 'bg-indigo-100', hover: 'group-hover:bg-indigo-200', text: 'text-indigo-600' },
-  arts: { bg: 'bg-orange-100', hover: 'group-hover:bg-orange-200', text: 'text-orange-600' },
-  default: { bg: 'bg-gray-100', hover: 'group-hover:bg-gray-200', text: 'text-gray-600' }
-}
-
-// Get colors based on category type or custom color
-const getColors = () => {
-  if (props.category.colors) {
-    return props.category.colors
+// Get category background color
+const getCategoryColor = (categoryName) => {
+  const colorMap = {
+    'science': 'bg-accent',
+    'literature': 'bg-accent-alt',
+    'history': 'bg-accent-blue',
+    'philosophy': 'bg-black',
+    'education': 'bg-accent',
+    'technology': 'bg-accent-blue',
+    'arts': 'bg-accent-alt',
+    'default': 'bg-black'
   }
   
-  const slug = props.category.slug?.toLowerCase() || props.category.name?.toLowerCase() || 'default'
-  
-  // Check if slug matches any predefined color mapping
-  for (const [key, colors] of Object.entries(colorMappings)) {
-    if (slug.includes(key)) {
-      return colors
-    }
-  }
-  
-  return colorMappings.default
+  return colorMap[categoryName?.toLowerCase()] || colorMap.default
 }
 
-const colors = getColors()
-
-const iconBackground = computed(() => colors.bg)
-const iconHoverBackground = computed(() => colors.hover)
-const iconColor = computed(() => colors.text)
+// Get icon color based on background
+const getIconColor = (categoryName) => {
+  const iconColorMap = {
+    'science': 'text-black',
+    'literature': 'text-white',
+    'history': 'text-white',
+    'philosophy': 'text-white',
+    'education': 'text-black',
+    'technology': 'text-white',
+    'arts': 'text-white',
+    'default': 'text-white'
+  }
+  
+  return iconColorMap[categoryName?.toLowerCase()] || iconColorMap.default
+}
 </script>
 
 <style scoped>
